@@ -101,8 +101,9 @@ int main(int argc, char *argv[]) {
     bcopy((char *)server->h_addr, (char *)&serv_addr.sin_addr.s_addr, server->h_length);
     serv_addr.sin_port = htons(portno);
     ROS_INFO("Breakpoint: %s","3");
-    if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
-        showerror("ERROR connecting");
+    int idx = connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr));
+    std::cout << "Connect IDX: " << idx << std::endl;
+    if (idx < 0) showerror("ERROR connecting");
     ROS_INFO("Breakpoint: %s","4");
     std::cout << "Subscribe from the server and Publish the /omega_received";
 
@@ -110,7 +111,6 @@ int main(int argc, char *argv[]) {
     while(ros::ok()) {
 
         char buffer[8] = {'H','i','-','S','t','a','r','t'};
-        ROS_INFO("Breakpoint: %s","5");
         int idx = write(sockfd,buffer,strlen(buffer));
         if (idx < 0) showerror("ERROR writing to socket");
         std::cout << buffer[0] << buffer[1] << std::endl;
