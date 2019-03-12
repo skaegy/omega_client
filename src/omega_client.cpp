@@ -103,12 +103,14 @@ int main(int argc, char *argv[]) {
     ROS_INFO("Breakpoint: %s","3");
     if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
         showerror("ERROR connecting");
+    ROS_INFO("Breakpoint: %s","4");
     std::cout << "Subscribe from the server and Publish the /omega_received";
 
 
     while(ros::ok()) {
 
         char buffer[8] = {'H','i','-','S','t','a','r','t'};
+        ROS_INFO("Breakpoint: %s","5");
         int idx = write(sockfd,buffer,strlen(buffer));
         if (idx < 0) showerror("ERROR writing to socket");
         std::cout << buffer[0] << buffer[1] << std::endl;
