@@ -102,11 +102,12 @@ int main(int argc, char *argv[]) {
         showerror("ERROR connecting");
     std::cout << "Subscribe from the server and Publish the /omega_received";
 
-    char buffer[2] = {'H','i'};
-    int idx = write(sockfd,buffer,strlen(buffer));
-    if (idx < 0) showerror("ERROR writing to socket");
 
     while(ros::ok()) {
+
+        char buffer[8] = {'H','i','-','S','t','a','r','t'};
+        int idx = write(sockfd,buffer,strlen(buffer));
+        if (idx < 0) showerror("ERROR writing to socket");
         ros::spinOnce();
     }
 
