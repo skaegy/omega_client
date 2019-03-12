@@ -13,8 +13,8 @@
 void callback(const geometry_msgs::PoseStamped::ConstPtr& msg){
     geometry_msgs::PoseStamped ps;
     ros::Time currentOS = ros::Time::now();
-    double SecDiff = currentOS.sec - msg->header.stamp.sec;
-    double NsecDiff = (currentOS.nsec - msg->header.stamp.nsec)/1e9;
+    double SecDiff = abs(currentOS.sec - msg->header.stamp.sec);
+    double NsecDiff = abs((currentOS.nsec - msg->header.stamp.nsec)/1e9);
     ROS_INFO("Time difference between server and client is: %f",
                      (SecDiff+NsecDiff));
 
