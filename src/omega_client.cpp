@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
     serv_addr.sin_port = htons(portno);
     ROS_INFO("Breakpoint: %s","3");
     int idx = connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr));
-    std::cout << "Connect IDX: " << idx << std::endl;
+    ROS_INFO("Breakpoint: %d",idx);
     if (idx < 0) showerror("ERROR connecting");
     ROS_INFO("Breakpoint: %s","4");
     std::cout << "Subscribe from the server and Publish the /omega_received";
