@@ -108,6 +108,7 @@ int main(int argc, char *argv[]) {
         char buffer[8] = {'H','i','-','S','t','a','r','t'};
         int idx = write(sockfd,buffer,strlen(buffer));
         if (idx < 0) showerror("ERROR writing to socket");
+        std::cout << buffer[0] << buffer[1] << std::endl;
         ros::spinOnce();
     }
 
